@@ -1,0 +1,20 @@
+{
+  "name": "javascript-object-structure",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrew-paterson/javascript-object-structure.git"
+  },
+  "author": "Andrew Paterson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrew-paterson/javascript-object-structure/issues"
+  },
+  "homepage": "https://github.com/andrew-paterson/javascript-object-structure#readme"
+}
