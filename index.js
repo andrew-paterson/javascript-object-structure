@@ -1,7 +1,8 @@
 import _merge from 'lodash.merge';
 
 export default function jsonObjectStucture(json, opts = {}) {
-  return parseObject(json, opts);
+  const jsonCopy = JSON.parse(JSON.stringify(json));
+  return parseObject(jsonCopy, opts);
 }
 
 function mergeObjects(array) {
