@@ -1,3 +1,5 @@
+import _merge from 'lodash.merge';
+
 export default function jsonAsDataTypes(json) {
   return parseObject(json, { preserveKey: 'id' });
 }

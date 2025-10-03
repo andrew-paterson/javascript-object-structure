@@ -1,11 +1,11 @@
 {
   "name": "javascript-object-structure",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "qunit test.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/andrew-paterson/javascript-object-structure/issues"
   },
-  "homepage": "https://github.com/andrew-paterson/javascript-object-structure#readme"
+  "homepage": "https://github.com/andrew-paterson/javascript-object-structure#readme",
+  "dependencies": {
+    "lodash.merge": "^4.6.2",
+    "eslint": "^8.11.0",
+    "tag-and-release": "^1.0.17",
+    "qunit": "^2.22.0"
+  }
 }
