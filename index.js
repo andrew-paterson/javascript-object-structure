@@ -1,7 +1,13 @@
 import _merge from 'lodash.merge';
 
-export default function jsonAsDataTypes(json) {
-  return parseObject(json, { preserveKey: 'id' });
+export default function jsonObjectStucture(json, opts = {}) {
+  return parseObject(json, opts);
+}
+
+function mergeObjects(array) {
+  return array.reduce((acc, item) => {
+    return _merge(acc, item);
+  }, {});
 }
 
 function parseArray(array, opts) {
@@ -17,18 +23,18 @@ function parseArray(array, opts) {
   }
   if (typeof array[0] === 'object') {
     if (array[0][opts.preserveKey]) {
+      // Include one item in the final array for each different value of the preserveKey
       const grouped = groupBy(array, opts.preserveKey);
       if (grouped.length > 1) {
-        return sortObjectsByKeys(
-          grouped.map((group) => parseArray(group.items, opts)),
-          opts.preserveKey
-        );
+        const uniqueParsedObjects = grouped.map((group) => {
+          const merged = mergeObjects(group.items);
+          return parseObject(merged, opts);
+        });
+        return sortObjectsByKeys(uniqueParsedObjects, opts.preserveKey);
       }
     }
-    const merged = array.reduce((acc, item) => {
-      return _merge(acc, item);
-    }, {});
-    return parseObject(merged, opts);
+    const merged = mergeObjects(array);
+    return [parseObject(merged, opts)];
   }
 }
 
@@ -64,7 +70,7 @@ function parseObject(object, opts) {
     if (object[key] === null) {
       object[key] = 'unknown';
     } else if (isPrimitive(object[key])) {
-      object[key] = key === 'type' ? object[key] : typeof object[key];
+      object[key] = key === opts.preserveKey ? object[key] : typeof object[key];
     } else if (Array.isArray(object[key])) {
       object[key] = parseArray(object[key], opts);
     } else if (typeof object[key] === 'object') {

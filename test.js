@@ -3,18 +3,25 @@ import QUnit from 'qunit';
 
 const data = {
   input: {
-    name: 'Test Object',
-    type: 'user',
-    id: '12345',
-    items: [
+    data: {
+      name: 'Test Object',
+      type: 'user',
+      id: '12345',
+    },
+    included: [
+      {
+        id: '34',
+        age: 40,
+        type: 'something-else',
+      },
       {
         id: 'a1',
         value: 10,
         details: {
           description: 'First item',
           tags: ['alpha', 'beta'],
-          type: 'item',
         },
+        type: 'item',
       },
       {
         id: 'a2',
@@ -22,33 +29,31 @@ const data = {
         details: {
           description: 'Second item',
           tags: ['beta', 'gamma'],
-          type: 'item',
         },
+        type: 'item',
       },
     ],
   },
   output: {
-    name: 'string',
-    type: 'user',
-    id: 'string',
-    items: [
+    data: {
+      name: 'string',
+      type: 'user',
+      id: 'string',
+    },
+    included: [
       {
         id: 'string',
         value: 'number',
         details: {
           description: 'string',
           tags: ['string'],
-          type: 'item',
         },
+        type: 'item',
       },
       {
         id: 'string',
-        value: 'number',
-        details: {
-          description: 'string',
-          tags: ['string'],
-          type: 'item',
-        },
+        age: 'number',
+        type: 'something-else',
       },
     ],
   },
@@ -56,6 +61,6 @@ const data = {
 
 QUnit.module('API Tests', () => {
   QUnit.test('Basics', async function (assert) {
-    assert.deepEqual(jsonObjectStucture(data.input), data.output, 'Basic structure match');
+    assert.deepEqual(jsonObjectStucture(data.input, { preserveKey: 'type' }), data.output, 'Basic structure match');
   });
 });
