@@ -69,9 +69,9 @@ function sortObjectsByKeys(array, key) {
 function parseObject(object, opts) {
   for (const key in object) {
     if (object[key] === null) {
-      object[key] = 'unknown';
+      object[key] = null;
     } else if (isPrimitive(object[key])) {
-      object[key] = key === opts.preserveKey ? object[key] : typeof object[key];
+      object[key] = key === opts.preserveKey || (opts.preserveKeys || []).includes(key) ? object[key] : typeof object[key];
     } else if (Array.isArray(object[key])) {
       object[key] = parseArray(object[key], opts);
     } else if (typeof object[key] === 'object') {

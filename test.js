@@ -53,6 +53,7 @@ const data = {
       {
         id: 'string',
         age: 'number',
+        name: null,
         type: 'something-else',
       },
     ],
